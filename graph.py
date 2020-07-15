@@ -26,14 +26,14 @@ class Graph(object):
 
     # this method finds the distance between two given vertices
     # time complexity: O(n)
-    def distance_between_vertices(self, origin, destination):
-        return self.vertices.find(origin.identifier.distance_to_next(destination))
+    def distance_between_vertices(self, origin, target):
+        return self.vertices.find(origin.identifier).distance_to_next(target)
 
     # similar to the above method, this one finds the distance between a location
     # and where the package needs to arrive
     def distance_to_delivery(self, location):
         def distance_to_next(package):
-            return self.vertices.find(location.identifier).distance_to_next(package)
+            return self.vertices.find(location.identifier).distance_to_next(package.destination)
 
         return distance_to_next
 

@@ -25,7 +25,7 @@ class Package(object):
         self.truck_availability = [1, 2]
         self.notes = notes
 
-        self.modify(notes)
+        self.modify_package(notes)
 
     def line_report(self, time):
         report = self.report(time)

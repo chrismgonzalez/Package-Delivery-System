@@ -24,7 +24,7 @@ class Truck(object):
             package.on_truck = True
             package.left_hub = self.current_time
 
-    def is_truck_full(self):
+    def is_it_full(self):
         return len(self.packages) == self.max
 
     def wait_at_the_hub(self, timestamp):
@@ -45,10 +45,10 @@ class Truck(object):
             # sort locations
             # using a set optimizes the sort algorithm
             # multiple packages at a location only needs to sort once
-            locations = sorted(locations, key=city_map.distance_from(present_location))
+            locations = sorted(locations, key=city_map.distance_from_location(present_location))
             closest_location = locations.pop(0)
 
-            distance = city_map.find_distance_between(present_location, closest_location)
+            distance = city_map.distance_between_vertices(present_location, closest_location)
             time_to_delivery = self.travel_time(distance)
             delivered_at = self.current_time + timedelta(seconds=time_to_delivery)
 
@@ -69,7 +69,7 @@ class Truck(object):
 
         # execute this block if the truck needs to return to the hub and retrieve more packages
         if return_to_hub:
-            distance = city_map.find_distance_between(present_location, self.start_location)
+            distance = city_map.distance_between_vertices(present_location, self.start_location)
             return_time = self.travel_time(distance)
 
             self.current_time = self.current_time + timedelta(seconds=return_time)

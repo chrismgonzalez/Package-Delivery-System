@@ -15,7 +15,7 @@ class Vertex(object):
     # find the edge from the edge id
     # time complexity: O(n)
     def find_edge(self, edge_id):
-        return self.edges.find(self, edge_id)
+        return self.edges.find(edge_id)
 
     # find the distance to the nearest neighbor vertex
     # time complexity: O(n)

@@ -1,9 +1,14 @@
 import os
 from datetime import timedelta
 
+from package_delivery import PackageDeliveryProgram
+
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+(total_distance, packages_hash, packages) = PackageDeliveryProgram.run()
 
 
 clear()
