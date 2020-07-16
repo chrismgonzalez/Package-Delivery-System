@@ -2,7 +2,7 @@ from datetime import timedelta
 
 
 class Truck(object):
-    MAX_PACKAGES = 16
+    MAX_PACKAGES = 15
     SPEED_IN_MPH = 18.0
     SECONDS_IN_HOUR = 3600.0
 

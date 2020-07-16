@@ -36,13 +36,29 @@ while True:
         Please enter a command: """)
 
     if command == 'id':
-        print('not working yet')
+        package_id = input('Enter a package ID to lookup: ')
+
+        # finds the package from the package hashtable.
+        # Time complexity: 0(n), where n is the container size
+        package = packages_hash.find(int(package_id))
+
+        time_string = input('Please enter a timestamp the following format (HH:MM:SS): ')
+        (hour, minute, sec) = time_string.split(":")
+        timestamp = timedelta(hours=int(hour), minutes=int(minute), seconds=int(sec))
+
+        print(package.report(timestamp))
 
     elif command == 'time':
-        print('not working yet')
+        time_string = input('Please enter a timestamp the following format (HH:MM:SS): ')
+        (hour, minute, sec) = time_string.split(":")
+        timestamp = timedelta(hours=int(hour), minutes=int(minute), seconds=int(sec))
+
+        # loop through all packages and display them in a nice format
+        for package in packages:
+            print(package.line_report(timestamp))
 
     elif command == 'distance':
-        print('not working yet')
+        print('Total Distance Traveled: {:.2f} miles'.format(total_distance))
 
     elif command == 'clear':
         clear()

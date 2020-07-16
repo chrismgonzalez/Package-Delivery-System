@@ -1,6 +1,7 @@
 from datetime import timedelta
 import re
 
+
 class Package(object):
     END_OF_DAY_TIME = timedelta(hours=17)
     PRIORITY_PACKAGES = [13, 15, 19]
@@ -35,16 +36,16 @@ class Package(object):
     def report(self, time=timedelta(hours=17)):
         return """
     ID: {}
-    Address: {} {}, UT
-    Zipcode: {}
+    Address: {} {}, UT, {}
+    Deadline: {}
     Weight: {}
     Delivery Status: {} \
     """.format(
             self.identifier,
             self.street,
             self.city,
-            self.zip,
-            self.deadline(),
+            self.zipcode,
+            self._deadline(),
             self.weight_in_kilos,
             self.status(time)
         )
@@ -52,7 +53,7 @@ class Package(object):
     def has_deadline(self):
         return self.deadline != self.END_OF_DAY_TIME
 
-    def deadline(self):
+    def _deadline(self):
         if self.deadline == self.END_OF_DAY_TIME:
             return '{} (EOD)'.format(self.deadline)
 
@@ -69,6 +70,8 @@ class Package(object):
             return self.IS_DELIVERED.format(self.delivered_at)
         elif time > self.left_hub:
             return self.IS_ON_TRUCK.format(self.left_hub)
+        else:
+            return self.STILL_AT_HUB
 
     def convert_to_timestamp(self, time_string):
         if time_string == 'EOD':
@@ -82,7 +85,7 @@ class Package(object):
         if re.match('Wrong address listed', notes):
             self.ready_at = timedelta(hours=10, minutes=20)
             self.street = '410 S State St'
-            self.zip = 84111
+            self.zipcode = 84111
         elif re.match('Delayed', notes):
             self.ready_at = timedelta(hours=9, minutes=5)
         elif re.match('Can only be on truck 2', notes):
