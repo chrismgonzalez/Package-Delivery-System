@@ -2,6 +2,7 @@ from hash_table import HashTable
 from vertex import Vertex
 from edge import Edge
 
+
 class Graph(object):
     def __init__(self):
         self.vertices = HashTable(20)
@@ -13,7 +14,7 @@ class Graph(object):
         self.vertices.insert(location.identifier, Vertex(location))
 
     # this method adds a weighted edge, which is the distance between the origin location
-    # and distance location.  The weighted edge can be traversed both ways, it is undirected
+    # and arrival location.  The weighted edge can be traversed both ways, it is undirected
     # time complexity: 0(n)
     def add_weighted_edge(self, origin, destination, weight):
         self.vertices.find(origin.identifier).add_new_edge(Edge(destination, weight))
@@ -27,22 +28,22 @@ class Graph(object):
     # this method finds the distance between two given vertices
     # time complexity: O(n)
     def distance_between_vertices(self, origin, target):
-        return self.vertices.find(origin.identifier).distance_to_next(target)
+        return self.vertices.find(origin.identifier).distance_to_next_location(target)
 
     # similar to the above method, this one finds the distance between a location
     # and where the package needs to arrive
     def distance_to_delivery(self, location):
-        def distance_to_next(package):
-            return self.vertices.find(location.identifier).distance_to_next(package.destination)
+        def distance_to_next_location(package):
+            return self.vertices.find(location.identifier).distance_to_next_location(package.destination)
 
-        return distance_to_next
+        return distance_to_next_location
 
     # this method is used when finding the next closest location to which the truck should travel
     def distance_from_location(self, origin):
-        def distance_to_next(destination):
-            return self.vertices.find(origin.identifier).distance_to_next(destination)
+        def distance_to_next_location(destination):
+            return self.vertices.find(origin.identifier).distance_to_next_location(destination)
 
-        return distance_to_next
+        return distance_to_next_location
 
 
 

@@ -1,7 +1,9 @@
 from hash_table import HashTable
 
 # this class constructs a vertex, which will be each location that packages
-# will be delivered to.  Locations are stored in a Hash table
+# will be delivered to.  Locations information is stored in a Hash table
+
+
 class Vertex(object):
     def __init__(self, location):
         self.edges = HashTable()
@@ -19,5 +21,5 @@ class Vertex(object):
 
     # find the distance to the nearest neighbor vertex
     # time complexity: O(n)
-    def distance_to_next(self, location):
+    def distance_to_next_location(self, location):
         return self.edges.find(location.identifier).weight
