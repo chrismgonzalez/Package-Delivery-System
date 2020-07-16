@@ -1,4 +1,3 @@
-# main delivery program logic - loading of packages and trucks
 import csv
 from datetime import timedelta
 
@@ -8,10 +7,12 @@ from hash_table import HashTable
 from graph import Graph
 from truck import Truck
 
+
 class PackageDeliveryProgram(object):
     @staticmethod
-
-    # this is the main function that executs the entire program
+    # this is the main function that executes the entire program
+    # run initializes new hash tables with predetermined size
+    # it also parses the csv files and loads their data in to the respective hash and list
     def run():
         graph = Graph()
         locations_hash = HashTable(20)
@@ -45,6 +46,7 @@ class PackageDeliveryProgram(object):
                 package = Package(*(data_row+[locations_hash.find(data_row[1])]))
 
                 # add the package to the all_packages list
+                # and add the package to the package hash table with package info and it's identifier
                 all_packages.append(package)
                 packages_hash.insert(package.identifier, package)
 
@@ -57,7 +59,6 @@ class PackageDeliveryProgram(object):
 
         # loop through the distance-data.csv and find the distance between locations
         # this is the data that is used to build the edges between vertices in the graph
-
         with open('distance_data.csv') as csvfile:
             distance_data = csv.reader(csvfile)
 
@@ -67,7 +68,8 @@ class PackageDeliveryProgram(object):
                 for j, data in enumerate(data_row):
                     if data != '':
 
-                        # add a weighted edge to the graph
+                        # add a weighted edge to the graph, the weighted edge is the distance between
+                        # two vertices
                         # complexity: 0(n)
                         graph.add_weighted_edge(locations_hash.find(i),
                                                 locations_hash.find(j),
@@ -114,20 +116,21 @@ class PackageDeliveryProgram(object):
                 truck.add_package(package)
                 count += 1
 
-                if truck.is_it_full():
+                if truck.is_truck_full():
                     break
 
             # checks if the truck is full, if not, it adds nearby packages ready to deliver
-            if truck.is_it_full() is not True:
+            if truck.is_truck_full() is not True:
                 filter_low_priority = [p for p in low_priority if truck.can_be_delivered(p)]
                 for package in filter_low_priority:
                     truck.add_package(package)
                     count += 1
 
-                    if truck.is_it_full():
+                    if truck.is_truck_full():
                         break
 
-            # truck delivers packages using a greedy algorithm to find the most optimized path through the graph
+            # truck delivers packages using a greedy algorithm
+            # that finds the most optimized path through the graph
             # Time complexity: O(n^2*log(n))
             truck.deliver_packages(graph, (len(all_packages) - count) > truck.max)
             i += 1

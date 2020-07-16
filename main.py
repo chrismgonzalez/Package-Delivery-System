@@ -46,7 +46,7 @@ while True:
         print(package.report(timestamp))
 
     elif user_response == str(2):
-        time_string = input('Please enter a timestamp the following format (HH:MM:SS, 1P.M. is 13:00:00): ')
+        time_string = input('Please enter a timestamp the following format (HH:MM:SS): ')
         (hour, minute, sec) = time_string.split(":")
         timestamp = timedelta(hours=int(hour), minutes=int(minute), seconds=int(sec))
 
