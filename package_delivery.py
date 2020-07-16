@@ -42,8 +42,8 @@ class PackageDeliveryProgram(object):
         with open('package_data.csv') as csvfile:
             package_data = csv.reader(csvfile)
 
-            for data_row in package_data:
-                package = Package(*(data_row+[locations_hash.find(data_row[1])]))
+            for row_of_data in package_data:
+                package = Package(*(row_of_data+[locations_hash.find(row_of_data[1])]))
 
                 # add the package to the all_packages list
                 # and add the package to the package hash table with package info and it's identifier
@@ -64,8 +64,8 @@ class PackageDeliveryProgram(object):
 
             # loop through each item in the csv file
             # complexity: O(n^2)
-            for i, data_row in enumerate(distance_data):
-                for j, data in enumerate(data_row):
+            for i, row_of_data in enumerate(distance_data):
+                for j, data in enumerate(row_of_data):
                     if data != '':
 
                         # add a weighted edge to the graph, the weighted edge is the distance between
@@ -96,12 +96,12 @@ class PackageDeliveryProgram(object):
         low_priority = sorted(low_priority, key=graph.distance_to_delivery(start_location))
 
         count = 0
-        truck_idx = 0
+        truck_index = 0
         i = 0
 
         # loop until all packages have been delivered. This should be three loops
         while count < len(all_packages):
-            truck = trucks[truck_idx]
+            truck = trucks[truck_index]
 
             if i < len(times_to_leave_hub):
                 leave_hub_at = times_to_leave_hub[i]
@@ -134,7 +134,7 @@ class PackageDeliveryProgram(object):
             # Time complexity: O(n^2*log(n))
             truck.deliver_packages(graph, (len(all_packages) - count) > truck.max)
             i += 1
-            truck_idx = i % len(trucks)
+            truck_index = i % len(trucks)
 
         def total_distance(truck):
             return truck.total_distance
