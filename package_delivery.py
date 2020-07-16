@@ -119,8 +119,8 @@ class PackageDeliveryProgram(object):
 
             # checks if the truck is full, if not, it adds nearby packages ready to deliver
             if truck.is_it_full() is not True:
-                filtered_low = [p for p in low_priority if truck.can_be_delivered(p)]
-                for package in filtered_low:
+                filter_low_priority = [p for p in low_priority if truck.can_be_delivered(p)]
+                for package in filter_low_priority:
                     truck.add_package(package)
                     count += 1
 
