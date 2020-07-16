@@ -35,11 +35,14 @@ class Package(object):
 
     def report(self, time=timedelta(hours=17)):
         return """
+    ******** Package Information *********
     ID: {}
     Address: {} {}, UT, {}
     Deadline: {}
-    Weight: {}
+    Weight: {} kilograms
     Delivery Status: {} \
+    \
+    
     """.format(
             self.identifier,
             self.street,
