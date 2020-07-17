@@ -21,7 +21,7 @@ class PackageDeliveryProgram(object):
         # load location data from csv
         # populate hash table and build the graph with the data
 
-        with open('location-data.csv') as csvfile:
+        with open('./csv/location-data.csv') as csvfile:
             location_data = csv.reader(csvfile)
 
             # loop through the location data
@@ -39,7 +39,7 @@ class PackageDeliveryProgram(object):
         low_priority = []
 
         # loop through all package data and create some lists: high and low priority, and all packages
-        with open('package_data.csv') as csvfile:
+        with open('./csv/package_data.csv') as csvfile:
             package_data = csv.reader(csvfile)
 
             for row_of_data in package_data:
@@ -59,7 +59,7 @@ class PackageDeliveryProgram(object):
 
         # loop through the distance-data.csv and find the distance between locations
         # this is the data that is used to build the edges between vertices in the graph
-        with open('distance_data.csv') as csvfile:
+        with open('./csv/3distance_data.csv') as csvfile:
             distance_data = csv.reader(csvfile)
 
             # loop through each item in the csv file
