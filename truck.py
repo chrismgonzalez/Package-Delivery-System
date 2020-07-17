@@ -36,7 +36,10 @@ class Truck(object):
     # this method is a helper method that helps the program determine if the package
     # can be delivered by the truck and if it is ready for delivery
     def can_be_delivered(self, package):
-        return not package.on_truck and self.identifier in package.truck_availability and self.current_time >= package.ready_at
+        return not package.on_truck \
+            and self.identifier \
+            in package.truck_availability \
+            and self.current_time >= package.ready_at
 
     # greedy algorithm for package sorting
     # time complexity: O(n^2 * log(n)) - n is the number of packages
@@ -79,7 +82,7 @@ class Truck(object):
             self.total_distance += distance
 
             # since we are returning to the hub and packages have been delivered
-            # reset the set() to be empty for the next load, if needed
+            # reset the set() to be empty for the next load,
             self.locations = set()
 
     # this method is used by the greedy algorithm as a helper to calculate travel time over a distance
