@@ -5,7 +5,7 @@ from package import Package
 from location import Location
 from hash_table import HashTable
 from graph import Graph
-from truck import Truck
+from delivery_truck import Truck
 
 
 class PackageDeliveryProgram(object):
@@ -59,7 +59,7 @@ class PackageDeliveryProgram(object):
 
         # loop through the distance-data.csv and find the distance between locations
         # this is the data that is used to build the edges between vertices in the graph
-        with open('./csv/3distance_data.csv') as csvfile:
+        with open('./csv/distance_data.csv') as csvfile:
             distance_data = csv.reader(csvfile)
 
             # loop through each item in the csv file

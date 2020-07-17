@@ -1,6 +1,6 @@
 from hash_table import HashTable
-from vertex import Vertex
-from edge import Edge
+from graph_vertex import Vertex
+from graph_edge import Edge
 
 
 class Graph(object):
