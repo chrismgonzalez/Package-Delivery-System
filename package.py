@@ -7,7 +7,7 @@ class Package(object):
     PRIORITY_PACKAGES = [13, 15, 19]
     IS_DELIVERED = 'Package was delivered at {}'
     IS_ON_TRUCK = 'Package is on truck - it left the hub at: {}'
-    STILL_AT_HUB = 'Package is still at the hub'
+    IS_STILL_AT_HUB = 'Package is still at the hub'
 
     def __init__(self, identifier, street, city, zipcode, deadline, weight_in_kilograms, notes, destination):
         self.identifier = int(identifier)
@@ -74,7 +74,7 @@ class Package(object):
         elif time > self.left_hub:
             return self.IS_ON_TRUCK.format(self.left_hub)
         else:
-            return self.STILL_AT_HUB
+            return self.IS_STILL_AT_HUB
 
     def convert_to_timestamp(self, time_string):
         if time_string == 'EOD':
